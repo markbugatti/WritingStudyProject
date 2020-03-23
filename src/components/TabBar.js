@@ -6,9 +6,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import CourseList from '../components/CourseList'
 import AlphabetList from '../components/AlphabetList'
-import VideoBlock from '../components/VideoBlock';
+import SyllableList from './SyllableList'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,18 +58,18 @@ export default function SimpleTabs() {
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Літери" {...a11yProps(0)} />
+          <Tab label="Склади" {...a11yProps(1)} />
+          <Tab label="Слова" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <AlphabetList/>
-        <CourseList/>
-        <VideoBlock/>
+        {/* <AlphabetPage/> */}
+        {/* <VideoBlock/> */}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <SyllableList/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

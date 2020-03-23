@@ -12,10 +12,11 @@ const client = contentful.createClient({
     accessToken: ACCESS_TOKET
 })
 
-class CourseList extends Component {
+class AlphabetPage extends Component {
     state = {
         courses: [],
-        searchString: ''
+        searchString: '',
+        selected: { letter: '', type: ''}
     }
 
     constructor() {
@@ -74,4 +75,4 @@ class CourseList extends Component {
     }
 }
 
-export default CourseList;
+export default AlphabetPage;
