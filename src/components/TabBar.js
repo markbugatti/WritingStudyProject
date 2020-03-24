@@ -8,6 +8,11 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import AlphabetList from '../components/AlphabetList'
 import SyllableList from './SyllableList'
+import * as contentful from 'contentful' 
+
+const SPACE_ID = '7kwcorev18qn'
+const ACCESS_TOKET = 'iIqFNbMVqZWVkoVvJ_c6htofPLk3pqXyReWLLnZ7TQ0'
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -47,6 +52,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SimpleTabs() {
+    const client = contentful.createClient({
+      space: SPACE_ID,
+      accessToken: ACCESS_TOKET
+    })
+  
+
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -63,13 +74,13 @@ export default function SimpleTabs() {
           <Tab label="Слова" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <AlphabetList/>
+      <TabPanel value={value} index={1}>
+        <AlphabetList client={client}/>
         {/* <AlphabetPage/> */}
         {/* <VideoBlock/> */}
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <SyllableList/>
+      <TabPanel value={value} index={0}>
+        <SyllableList client={client}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

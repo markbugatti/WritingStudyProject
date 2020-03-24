@@ -4,6 +4,7 @@ import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
 import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles(theme => ({
     formControl: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-export default function Syllable() {
+export default function Syllable(props) {
     const classes = useStyles();
     const [state, setState] = React.useState({
         age: '',
@@ -31,9 +32,11 @@ export default function Syllable() {
       };
 
 
+    
     return(
         <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel htmlFor="outlined-age-native-simple">Age</InputLabel>
+          {/* вставить конкретную букву */}
+        <InputLabel htmlFor="outlined-age-native-simple">{props.letter}</InputLabel>
         <Select
           native
           value={state.age}
@@ -43,12 +46,15 @@ export default function Syllable() {
             name: 'age',
             id: 'outlined-age-native-simple',
           }}
+          
         >
-          <option aria-label="None" value="">
-          </option>
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
+          {/* Вставить конкретные склады */}
+            {
+              props.syllables.map(syllable => (
+                <option>{syllable}</option>
+              )
+              )
+            }
         </Select>
       </FormControl>
     )

@@ -2,15 +2,7 @@ import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid'
 import Letter from './Letter'
 import VideoBlock from './VideoBlock'
-import * as contentful from 'contentful'
 
-const SPACE_ID = '7kwcorev18qn'
-const ACCESS_TOKET = 'iIqFNbMVqZWVkoVvJ_c6htofPLk3pqXyReWLLnZ7TQ0'
-
-const client = contentful.createClient({
-    space: SPACE_ID,
-    accessToken: ACCESS_TOKET
-})
 
 class AlphabetList extends Component {
     state = {
@@ -19,13 +11,13 @@ class AlphabetList extends Component {
         VideoURL: ''
     }
     
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.getLetters();
     }
 
     getLetters = () => {
-        client.getEntries({
+        this.props.client.getEntries({
             content_type: 'course',
             order: 'fields.id'
         })
@@ -37,27 +29,27 @@ class AlphabetList extends Component {
     }
 
     getVideo (name = 'a', type = 'big') {
-        client.getAssets({
-            'fields.title[match]': name + "_" + type
-        })
-        .then((assets) => {
-            this.setState(() => (
-                {
-                    searchLetter: {
-                        name: name,
-                        type: type
-                    },
-                    VideoURL: assets.items[0].fields.file.url
-                }
-                ), () => {
-                    console.log(this.state.searchLetter.name);
-                    console.log(this.state.searchLetter.type);
-                    console.log(this.state.VideoURL)
-                } 
-            )
-            console.log(assets.items)
-        })
-        .catch(console.error)
+            this.props.client.getAssets({
+                'fields.title[match]': name + "_" + type
+            })
+            .then((assets) => {
+                this.setState(() => (
+                    {
+                        searchLetter: {
+                            name: name,
+                            type: type
+                        },
+                        VideoURL: assets.items[0].fields.file.url
+                    }
+                    ), () => {
+                        console.log(this.state.searchLetter.name);
+                        console.log(this.state.searchLetter.type);
+                        console.log(this.state.VideoURL)
+                    } 
+                )
+                console.log(assets.items)
+            })
+            .catch(console.error)
     }
 
     render() {
