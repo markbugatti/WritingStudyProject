@@ -37,7 +37,7 @@ class SyllableList extends Component {
             this.state.consonants.map(letter => 
                 <Syllable letter={letter} syllables={this.state.syllables.filter(item => item.fields.name.includes(letter))}/>
             )
-            )
+        )
     }
 
 }

@@ -1,10 +1,46 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl'
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel'
+import MenuItem from '@material-ui/core/MenuItem'
+import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
+import InputBase from '@material-ui/core/InputBase';
+
+const BootstrapInput = withStyles(theme => ({
+  root: {
+    'label + &': {
+      marginTop: theme.spacing(1),
+    },
+  },
+  input: {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.background.paper,
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    padding: '10px 26px 10px 12px',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:focus': {
+      borderRadius: 4,
+      borderColor: '#80bdff',
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    },
+  },
+}))(InputBase);
+
 
 const useStyles = makeStyles(theme => ({
     formControl: {
@@ -14,48 +50,43 @@ const useStyles = makeStyles(theme => ({
     selectEmpty: {
       marginTop: theme.spacing(2),
     },
+    margin: {
+      margin: theme.spacing(1),
+    }
   }));
 
-export default function Syllable(props) {
+const Syllable = (props) => {
     const classes = useStyles();
-    const [state, setState] = React.useState({
-        age: '',
-        name: 'hai',
-    })
-    
+    const [age, setAge] = React.useState('');
     const handleChange = event => {
-        const name = event.target.name;
-        setState({
-          ...state,
-          [name]: event.target.value,
-        });
-      };
-
-
-    
+      setAge(event.target.value);
+    };
     return(
-        <FormControl variant="outlined" className={classes.formControl}>
-          {/* вставить конкретную букву */}
-        <InputLabel htmlFor="outlined-age-native-simple">{props.letter}</InputLabel>
+      //<div>
+        <FormControl variant="outlined" className={classes.margin}>
+        <InputLabel id="syllables-select-label">{props.letter}</InputLabel>
         <Select
-          native
-          value={state.age}
+          labelId="syllables-select-label"
+          id="syllables=select"
+          value={age}
           onChange={handleChange}
-          label="Age"
-          inputProps={{
-            name: 'age',
-            id: 'outlined-age-native-simple',
-          }}
-          
+          input={<BootstrapInput />}
         >
-          {/* Вставить конкретные склады */}
-            {
-              props.syllables.map(syllable => (
-                <option>{syllable}</option>
-              )
-              )
-            }
+          <MenuItem value=""><em>None</em></MenuItem>
+          {
+            props.syllables.map((syllable, i) => {
+              return (
+                <MenuItem key={i} value={i}>
+                  {syllable.fields.name}
+                </MenuItem>
+                );
+              }
+            )
+          }
         </Select>
-      </FormControl>
+        </FormControl>
+      //</div>
     )
 }
+
+export default Syllable;
