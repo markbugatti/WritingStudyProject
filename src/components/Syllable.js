@@ -6,6 +6,7 @@ import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import InputBase from '@material-ui/core/InputBase';
 
+
 const BootstrapInput = withStyles(theme => ({
   root: {
     'label + &': {
@@ -60,6 +61,8 @@ const Syllable = (props) => {
     const [age, setAge] = React.useState('');
     const handleChange = event => {
       setAge(event.target.value);
+      props.onSelectItem(event.target.value)
+      console.log(event.target.value)
     };
     return(
       //<div>
@@ -76,7 +79,7 @@ const Syllable = (props) => {
           {
             props.syllables.map((syllable, i) => {
               return (
-                <MenuItem key={i} value={i}>
+                <MenuItem key={i} value={syllable.fields.movieUrl}>
                   {syllable.fields.name}
                 </MenuItem>
                 );
