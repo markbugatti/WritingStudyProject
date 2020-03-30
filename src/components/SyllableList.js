@@ -3,6 +3,7 @@ import Syllable from './Syllable'
 import VideoBlock from './VideoBlock'
 import Grid from '@material-ui/core/Grid'
 
+
 class SyllableList extends Component {
     state = {
         syllables: [],
@@ -14,6 +15,7 @@ class SyllableList extends Component {
         super(props);
         this.getSyllables();
         this.getVideo = this.getVideo.bind(this);
+
     }
 
     isLetter = (letter, syllable) => {
@@ -39,12 +41,30 @@ class SyllableList extends Component {
     getVideo (name) {
         this.setState(() => (
             {
-                videoURL: '../assets/' + name + '.mp4'
+                videoURL: process.env.PUBLIC_URL + '/assets/syllables/' + name + '.mp4'
             }
             ), () => {
                 console.log(this.state.videoURL)
+                console.log(process.env.PUBLIC_URL)
             } 
         )
+        // this.props.client.getAssets({
+        //     'fields.title[match]': name + "_small"
+        // })
+        // .then((assets) => {
+        //     this.setState(() => (
+        //         {
+        //             videoURL: assets.items[0].fields.file.url
+        //         }
+        //         ), () => {
+                    
+        //             console.log(this.state.VideoURL)
+        //         } 
+        //     )
+        //     console.log(assets.items)
+        // })
+        // .catch(console.error)
+
     }
 
     render() {
@@ -54,6 +74,7 @@ class SyllableList extends Component {
                     <Grid item lg={12}>
                         <Grid container spacing={1} > 
                         {this.state.consonants.map(letter => (
+                            
                             <Grid key={letter} item>
                                 <Syllable letter={letter} syllables={this.state.syllables.filter(item => item.fields.name.includes(letter))}
                                     onSelectItem={this.getVideo}/>

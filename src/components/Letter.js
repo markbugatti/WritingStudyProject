@@ -12,10 +12,10 @@ const useStyles = makeStyles(theme => ({
 const Letter = (props) => {
     const classes = useStyles();
     return(
-        <div onClick={props.onClick}>
+        <div onClick={() => props.onClick(props.letter)}>
             <Paper elevation={2} className={classes.paper}>              
                 <Typography  variant="h2" component="h2" align="center">
-                    {props.letter}
+                    {props.letter.fields.title}
                 </Typography>  
             </Paper>
         </div>

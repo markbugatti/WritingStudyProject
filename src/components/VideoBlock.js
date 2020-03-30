@@ -11,7 +11,7 @@ class VideoBlock extends Component {
         play: false,
         soundUrl: ''
     }
-    
+
     onPlayPauseButtonClick = (event) => {
         if(this.props.videoSrc) {
             if(this.state.play)
@@ -22,7 +22,7 @@ class VideoBlock extends Component {
             else {
                 this.setState({play: true});
                 this.refs.vidRef.play();
-            }   
+            }
         }
     }
 
@@ -45,21 +45,22 @@ class VideoBlock extends Component {
             <Paper>
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
-                        <video ref="vidRef" width="100%" height="100%" src={this.props.videoSrc} onPlay={this.OnVideoPlay} onPause={this.OnVideoPause} loop autoPlay>
-
+                    {/* src={this.props.videoSrc} */}
+                        <video ref="vidRef" width="100%" height="100%" src={this.props.videoSrc} onPlay={this.OnVideoPlay} onPause={this.OnVideoPause} loop autoPlay muted>
+                            {/* <source src={require(this.props.videoSrc)} type="vedeo/mp4"/> */}
                         </video>
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <Grid container>
                             <Grid item>
-                                <Button 
+                                <Button
                                     variant="contained"
                                     color="primary"
                                     startIcon={
-                                    this.state.play ? 
+                                    this.state.play ?
                                     (<PauseCircleFilledIcon/>)
                                     : (<PlayCircleFilledIcon/>)
-                                    } 
+                                    }
                                     onClick={this.onPlayPauseButtonClick}
                                     >
                                     Play/Pause
@@ -72,9 +73,9 @@ class VideoBlock extends Component {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid container>    
+                <Grid container>
                     <Grid item xs={12}>
-                        <Button 
+                        <Button
                             variant="contained"
                             color="default"
                             startIcon={<VolumeUpIcon/>}
@@ -84,8 +85,8 @@ class VideoBlock extends Component {
                     </Grid>
                 </Grid>
             </Paper>
-        ) 
-    }   
+        )
+    }
 }
 
 export default VideoBlock;

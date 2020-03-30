@@ -7,13 +7,13 @@ import VideoBlock from './VideoBlock'
 class AlphabetList extends Component {
     state = {
         alphabet: [],
-        searchLetter: {name: 'а', type: 'small'},
         VideoURL: ''
     }
     
     constructor(props) {
         super(props);
         this.getLetters();
+        this.getVideo = this.getVideo.bind(this);
     }
 
     getLetters = () => {
@@ -28,28 +28,33 @@ class AlphabetList extends Component {
         })
     }
 
-    getVideo (name = 'a', type = 'big') {
-            this.props.client.getAssets({
-                'fields.title[match]': name + "_" + type
-            })
-            .then((assets) => {
-                this.setState(() => (
-                    {
-                        searchLetter: {
-                            name: name,
-                            type: type
-                        },
-                        VideoURL: assets.items[0].fields.file.url
-                    }
-                    ), () => {
-                        console.log(this.state.searchLetter.name);
-                        console.log(this.state.searchLetter.type);
-                        console.log(this.state.VideoURL)
-                    } 
-                )
-                console.log(assets.items)
-            })
-            .catch(console.error)
+    getVideo (letter) {
+        this.setState(() => (
+            {
+                VideoURL: process.env.PUBLIC_URL + '/assets/letters/' + letter.fields.title + "_" + letter.fields.categories[0].fields.title + '.mp4'
+            }
+        ))
+            // this.props.client.getAssets({
+            //     'fields.title[match]': name + "_" + type
+            // })
+            // .then((assets) => {
+            //     this.setState(() => (
+            //         {
+            //             searchLetter: {
+            //                 name: name,
+            //                 type: type
+            //             },
+            //             VideoURL: assets.items[0].fields.file.url
+            //         }
+            //         ), () => {
+            //             console.log(this.state.searchLetter.name);
+            //             console.log(this.state.searchLetter.type);
+            //             console.log(this.state.VideoURL)
+            //         } 
+            //     )
+            //     console.log(assets.items)
+            //})
+            //.catch(console.error)
     }
 
     render() {
@@ -60,7 +65,7 @@ class AlphabetList extends Component {
                         <Grid container spacing={1} > 
                         {this.state.alphabet.map(letter => (
                             <Grid key={letter.sys.id} item>
-                                <Letter letter={letter.fields.title} onClick={() => this.getVideo(letter.fields.title, letter.fields.categories[0].fields.title)}/>
+                                <Letter letter={letter} onClick={this.getVideo}/>
                             </Grid>
                         ))}
                         </Grid>

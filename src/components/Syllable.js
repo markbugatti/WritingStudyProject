@@ -75,7 +75,7 @@ const Syllable = (props) => {
           onChange={handleChange}
           input={<BootstrapInput />}
         >
-          <MenuItem value=""><em>None</em></MenuItem>
+          <MenuItem value=""><em>Не вибрано</em></MenuItem>
           {
             props.syllables.map((syllable, i) => {
               return (
