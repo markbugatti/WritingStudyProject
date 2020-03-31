@@ -7,12 +7,14 @@ import Grid from '@material-ui/core/Grid'
 class SyllableList extends Component {
     state = {
         syllables: [],
-        consonants: ['б', 'в', 'г', 'ґ', 'д', 'ж', 'з', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'х', 'ц', 'ч', 'ш'],
         videoURL: ''
     }
 
+    consonants = []
+
     constructor (props) {
         super(props);
+        this.getConsonants();
         this.getSyllables();
         this.getVideo = this.getVideo.bind(this);
 
@@ -20,6 +22,26 @@ class SyllableList extends Component {
 
     isLetter = (letter, syllable) => {
         letter.fields.name.includes(syllable)
+    }
+
+    isConsonant(letter) {
+        try {
+            if(letter.fields.categories[1].fields.title === "consonant") return true;
+        }
+        catch {
+            return false;
+        }
+    }
+
+    getConsonants = () => {
+        this.props.client.getEntries({
+            content_type: 'course',
+        }
+        )
+        .then((albhabet) => {
+            this.consonants = albhabet.items.filter(this.isConsonant);
+            //this.setState({consonants: array})
+        })    
     }
 
     getSyllables = () => {
@@ -33,7 +55,7 @@ class SyllableList extends Component {
             // this.state.consonants.forEach(syllable => {
             //     var pushed = entries.items.filter(item => item.fields.name.includes(syllable) )
             //  });
-             console.log(this.state.syllables);
+             console.log("sylables: " + this.state.syllables);
         })  
         
     } 
@@ -48,23 +70,6 @@ class SyllableList extends Component {
                 console.log(process.env.PUBLIC_URL)
             } 
         )
-        // this.props.client.getAssets({
-        //     'fields.title[match]': name + "_small"
-        // })
-        // .then((assets) => {
-        //     this.setState(() => (
-        //         {
-        //             videoURL: assets.items[0].fields.file.url
-        //         }
-        //         ), () => {
-                    
-        //             console.log(this.state.VideoURL)
-        //         } 
-        //     )
-        //     console.log(assets.items)
-        // })
-        // .catch(console.error)
-
     }
 
     render() {
@@ -73,10 +78,10 @@ class SyllableList extends Component {
                 <Grid container spacing={2}>
                     <Grid item lg={12}>
                         <Grid container spacing={1} > 
-                        {this.state.consonants.map(letter => (
+                        {this.consonants.map(letter => (
                             
-                            <Grid key={letter} item>
-                                <Syllable letter={letter} syllables={this.state.syllables.filter(item => item.fields.name.includes(letter))}
+                            <Grid key={letter.sys.id} item>
+                                <Syllable letter={letter.fields.title} syllables={this.state.syllables.filter(item => item.fields.name.includes(letter.fields.title))}
                                     onSelectItem={this.getVideo}/>
                             </Grid>
                         ))}
