@@ -3,7 +3,6 @@ import Syllable from './Syllable'
 import VideoBlock from './VideoBlock'
 import Grid from '@material-ui/core/Grid'
 
-
 class SyllableList extends Component {
     state = {
         syllables: [],
@@ -17,7 +16,6 @@ class SyllableList extends Component {
         this.getConsonants();
         this.getSyllables();
         this.getVideo = this.getVideo.bind(this);
-
     }
 
     isLetter = (letter, syllable) => {
@@ -50,12 +48,8 @@ class SyllableList extends Component {
         }
         )
         .then((entries) => {
-            // розподілити усі склади, по першим літерам
             this.setState({syllables: entries.items})
-            // this.state.consonants.forEach(syllable => {
-            //     var pushed = entries.items.filter(item => item.fields.name.includes(syllable) )
-            //  });
-             console.log("sylables: " + this.state.syllables);
+            //console.log("sylables: " + this.state.syllables);
         })  
         
     } 
@@ -75,16 +69,15 @@ class SyllableList extends Component {
     render() {
         return (                
             <div>
-                <Grid container spacing={2}>
+                <Grid  container spacing={2}>
                     <Grid item lg={12}>
                         <Grid container spacing={1} > 
                         {this.consonants.map(letter => (
-                            
                             <Grid key={letter.sys.id} item>
                                 <Syllable letter={letter.fields.title} syllables={this.state.syllables.filter(item => item.fields.name.includes(letter.fields.title))}
                                     onSelectItem={this.getVideo}/>
-                            </Grid>
-                        ))}
+                            </Grid>)
+                        )}
                         </Grid>
                     </Grid>
                     <Grid item xs={12} sm={9} lg={8} xl={6}>

@@ -22,7 +22,6 @@ class AlphabetList extends Component {
             order: 'fields.id'
         })
         .then((entries) => {
-            // entries.items.sort();
             this.setState({alphabet: entries.items})
             console.log(entries.items)
         })
@@ -34,27 +33,6 @@ class AlphabetList extends Component {
                 VideoURL: process.env.PUBLIC_URL + '/assets/letters/' + letter.fields.title + "_" + letter.fields.categories[0].fields.title + '.mp4'
             }
         ))
-            // this.props.client.getAssets({
-            //     'fields.title[match]': name + "_" + type
-            // })
-            // .then((assets) => {
-            //     this.setState(() => (
-            //         {
-            //             searchLetter: {
-            //                 name: name,
-            //                 type: type
-            //             },
-            //             VideoURL: assets.items[0].fields.file.url
-            //         }
-            //         ), () => {
-            //             console.log(this.state.searchLetter.name);
-            //             console.log(this.state.searchLetter.type);
-            //             console.log(this.state.VideoURL)
-            //         } 
-            //     )
-            //     console.log(assets.items)
-            //})
-            //.catch(console.error)
     }
 
     render() {

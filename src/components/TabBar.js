@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import AlphabetList from '../components/AlphabetList'
 import SyllableList from './SyllableList'
 import * as contentful from 'contentful' 
+import { palette } from '@material-ui/system'
 
 const SPACE_ID = '7kwcorev18qn'
 const ACCESS_TOKET = 'iIqFNbMVqZWVkoVvJ_c6htofPLk3pqXyReWLLnZ7TQ0'
@@ -66,7 +67,7 @@ export default function SimpleTabs() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{backgroundColor: '#f3f3f3'}}>
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Склади" {...a11yProps(0)} />

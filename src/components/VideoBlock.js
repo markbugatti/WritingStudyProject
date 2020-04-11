@@ -5,11 +5,20 @@ import Button from '@material-ui/core/Button';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
+//import { Tab } from '@material-ui/core';
+
+var synth = window.speechSynthesis;
 
 class VideoBlock extends Component {
     state = {
         play: false,
-        soundUrl: ''
+        soundUrl: '',
+        
+    }
+
+    constructor(props) {
+        super(props);
+        this.onSoundButtonClick = this.onSoundButtonClick.bind(this);
     }
 
     onPlayPauseButtonClick = (event) => {
@@ -38,6 +47,13 @@ class VideoBlock extends Component {
         {
             this.setState({play: false});
         }
+    }
+
+    onSoundButtonClick(event) {
+        //var utterThis = new SpeechSynthesisUtterance('hello');
+        console.log(synth.getVoices());
+        //synth.speak(utterThis);
+        //var gtWindow = window.open("https://translate.google.com/?source=gtx#view=home&op=translate&sl=uk&tl=en&text=привіт як справи", "google translate", "");
     }
 
     render() {
@@ -79,6 +95,7 @@ class VideoBlock extends Component {
                             variant="contained"
                             color="default"
                             startIcon={<VolumeUpIcon/>}
+                            onClick={this.onSoundButtonClick}
                         >
                             Sound
                         </Button>
