@@ -49,7 +49,6 @@ class SyllableList extends Component {
         )
         .then((entries) => {
             this.setState({syllables: entries.items})
-            //console.log("sylables: " + this.state.syllables);
         })  
         
     } 
@@ -57,7 +56,7 @@ class SyllableList extends Component {
     getVideo (name) {
         this.setState(() => (
             {
-                videoURL: process.env.PUBLIC_URL + '/assets/syllables/' + name + '.mp4'
+                videoURL: process.env.PUBLIC_URL + '/assets/syllables/' + name + '_small.mp4'
             }
             ), () => {
                 console.log(this.state.videoURL)
@@ -69,18 +68,18 @@ class SyllableList extends Component {
     render() {
         return (                
             <div>
-                <Grid  container spacing={2}>
+                <Grid  container spacing={2} justify="center">
                     <Grid item lg={12}>
-                        <Grid container spacing={1} > 
+                        <Grid container > 
                         {this.consonants.map(letter => (
-                            <Grid key={letter.sys.id} item>
+                            <Grid key={letter.sys.id} item xs={3} sm={2} md={1}>
                                 <Syllable letter={letter.fields.title} syllables={this.state.syllables.filter(item => item.fields.name.includes(letter.fields.title))}
                                     onSelectItem={this.getVideo}/>
                             </Grid>)
                         )}
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={9} lg={8} xl={6}>
+                    <Grid item xs={12}>
                         <VideoBlock videoSrc={this.state.videoURL}/>
                     </Grid>
                 </Grid>

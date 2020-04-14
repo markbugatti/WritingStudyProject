@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid'
 import Letter from './Letter'
 import VideoBlock from './VideoBlock'
-
+import Typography from '@material-ui/core/Typography';
 
 class AlphabetList extends Component {
     state = {
@@ -15,7 +15,7 @@ class AlphabetList extends Component {
         this.getLetters();
         this.getVideo = this.getVideo.bind(this);
     }
-
+    
     getLetters = () => {
         this.props.client.getEntries({
             content_type: 'course',
@@ -30,7 +30,7 @@ class AlphabetList extends Component {
     getVideo (letter) {
         this.setState(() => (
             {
-                VideoURL: process.env.PUBLIC_URL + '/assets/letters/' + letter.fields.title + "_" + letter.fields.categories[0].fields.title + '.mp4'
+                VideoURL: process.env.PUBLIC_URL + '/assets/letters/' + letter.fields.transcription + "_" + letter.fields.categories[0].fields.title + '.mp4'
             }
         ))
     }
@@ -38,17 +38,19 @@ class AlphabetList extends Component {
     render() {
         return(
             <div>
-                <Grid container spacing={2}>
-                    <Grid item lg={12}>
-                        <Grid container spacing={1} > 
-                        {this.state.alphabet.map(letter => (
-                            <Grid key={letter.sys.id} item>
-                                <Letter letter={letter} onClick={this.getVideo}/>
+                <Grid container spacing={2} justify="center">
+                    <Grid item>
+                        <Typography  variant="h2" component="h2" align="center">
+                            <Grid container spacing={1}> 
+                            {this.state.alphabet.map(letter => (
+                                <Grid key={letter.sys.id} item xs={3} sm={2} md={1}>
+                                    <Letter letter={letter} onClick={this.getVideo}/>
+                                </Grid>
+                            ))}
                             </Grid>
-                        ))}
-                        </Grid>
+                        </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={9} lg={8} xl={6}>
+                    <Grid item xs={12}>
                         <VideoBlock videoSrc={this.state.VideoURL}/>
                     </Grid>
                 </Grid>

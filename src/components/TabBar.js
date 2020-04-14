@@ -6,14 +6,19 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import AlphabetList from '../components/AlphabetList'
-import SyllableList from './SyllableList'
-import * as contentful from 'contentful' 
-import { palette } from '@material-ui/system'
+import AlphabetList from '../components/AlphabetList';
+import SyllableList from './SyllableList';
+import * as contentful from 'contentful';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const SPACE_ID = '7kwcorev18qn'
 const ACCESS_TOKET = 'iIqFNbMVqZWVkoVvJ_c6htofPLk3pqXyReWLLnZ7TQ0'
 
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: 'Times New Roman, Times, serif',
+  },
+});
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -60,32 +65,36 @@ export default function SimpleTabs() {
   
 
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(2);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <div className={classes.root} style={{backgroundColor: '#f3f3f3'}}>
+    <ThemeProvider theme={theme}>
+    <div className={classes.root} style={{backgroundColor: '#7f7f7f00'}}>
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Склади" {...a11yProps(0)} />
+          <Tab label="Інструкція" {...a11yProps(0)} disabled/>
           <Tab label="Літери" {...a11yProps(1)} />
-          <Tab label="Слова" {...a11yProps(2)} />
+          <Tab label="Склади" {...a11yProps(2)}/>
+          <Tab label="Слова" {...a11yProps(3)} disabled/>
         </Tabs>
       </AppBar>
+      <TabPanel value={value} index={0}>
+        {/* place for instruction */}
+      </TabPanel>
       <TabPanel value={value} index={1}>
         <AlphabetList client={client}/>
-        {/* <AlphabetPage/> */}
-        {/* <VideoBlock/> */}
-      </TabPanel>
-      <TabPanel value={value} index={0}>
-        <SyllableList client={client}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <SyllableList client={client}/>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        
       </TabPanel>
     </div>
+    </ThemeProvider>
   );
 }

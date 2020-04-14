@@ -5,9 +5,15 @@ import Button from '@material-ui/core/Button';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
-//import { Tab } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 var synth = window.speechSynthesis;
+
+const StyledButton = withStyles({
+    root: {
+        margin: '10px'
+    }
+})(Button)
 
 class VideoBlock extends Component {
     state = {
@@ -58,18 +64,25 @@ class VideoBlock extends Component {
 
     render() {
         return(
-            <Paper>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} md={6}>
-                    {/* src={this.props.videoSrc} */}
-                        <video ref="vidRef" width="100%" height="100%" src={this.props.videoSrc} onPlay={this.OnVideoPlay} onPause={this.OnVideoPause} loop autoPlay muted>
-                            {/* <source src={require(this.props.videoSrc)} type="vedeo/mp4"/> */}
-                        </video>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
+            <Grid container justify="center">
+                <Grid item xs={12} md={8}>
+                    <Paper>
+                        <Grid container spacing={0} justify="center">
+                            <Grid item xs={11}>
+                                <video 
+                                    ref="vidRef"
+                                    width="100%"
+                                    src={this.props.videoSrc} 
+                                    onPlay={this.OnVideoPlay}
+                                    onPause={this.OnVideoPause}
+                                    loop autoPlay muted/>
+                                {/* <video ref="vidRef" src={this.props.videoSrc} onPlay={this.OnVideoPlay} onPause={this.OnVideoPause} loop autoPlay muted/> */}
+                            </Grid>
+                        </Grid>
                         <Grid container>
                             <Grid item>
-                                <Button
+
+                                <StyledButton
                                     variant="contained"
                                     color="primary"
                                     startIcon={
@@ -80,28 +93,25 @@ class VideoBlock extends Component {
                                     onClick={this.onPlayPauseButtonClick}
                                     >
                                     Play/Pause
-                                </Button>
+                                </StyledButton>        
+                            </Grid>
+                            <Grid item>
+                                <StyledButton
+                                    variant="contained"
+                                    color="default"
+                                    startIcon={<VolumeUpIcon/>}
+                                    onClick={this.onSoundButtonClick}
+                                >
+                                    Sound
+                                </StyledButton>
                             </Grid>
                             <Grid item>
                                 {/*  make slider here*/}
-
                             </Grid>
                         </Grid>
-                    </Grid>
+                    </Paper>
                 </Grid>
-                <Grid container>
-                    <Grid item xs={12}>
-                        <Button
-                            variant="contained"
-                            color="default"
-                            startIcon={<VolumeUpIcon/>}
-                            onClick={this.onSoundButtonClick}
-                        >
-                            Sound
-                        </Button>
-                    </Grid>
-                </Grid>
-            </Paper>
+            </Grid>
         )
     }
 }

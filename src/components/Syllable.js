@@ -18,27 +18,27 @@ const BootstrapInput = withStyles(theme => ({
     position: 'relative',
     backgroundColor: theme.palette.background.paper,
     border: '1px solid #ced4da',
-    fontSize: 16,
+    fontSize: 20,
     padding: '10px 26px 10px 12px',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     // Use the system font instead of the default Roboto font.
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-    '&:focus': {
-      borderRadius: 4,
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-    },
+    // fontFamily: [
+    //   '-apple-system',
+    //   'BlinkMacSystemFont',
+    //   '"Segoe UI"',
+    //   'Roboto',
+    //   '"Helvetica Neue"',
+    //   'Arial',
+    //   'sans-serif',
+    //   '"Apple Color Emoji"',
+    //   '"Segoe UI Emoji"',
+    //   '"Segoe UI Symbol"',
+    // ].join(','),
+    // '&:focus': {
+    //   borderRadius: 4,
+    //   borderColor: '#80bdff',
+    //   boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    // },
   },
 }))(InputBase);
 
@@ -62,7 +62,7 @@ const Syllable = (props) => {
     const handleChange = event => {
       setAge(event.target.value);
       props.onSelectItem(event.target.value)
-      console.log(event.target.value)
+      // console.log(event.target.value)
     };
     return(
       //<div>
@@ -79,7 +79,7 @@ const Syllable = (props) => {
           {
             props.syllables.map((syllable, i) => {
               return (
-                <MenuItem key={i} value={syllable.fields.movieUrl}>
+                <MenuItem key={i} value={syllable.fields.transcription}>
                   {syllable.fields.name}
                 </MenuItem>
                 );
