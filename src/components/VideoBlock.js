@@ -57,7 +57,7 @@ class VideoBlock extends Component {
 
     onSoundButtonClick(event) {
         //var utterThis = new SpeechSynthesisUtterance('hello');
-        console.log(synth.getVoices());
+        //console.log(synth.getVoices());
         //synth.speak(utterThis);
         //var gtWindow = window.open("https://translate.google.com/?source=gtx#view=home&op=translate&sl=uk&tl=en&text=привіт як справи", "google translate", "");
     }
@@ -65,7 +65,7 @@ class VideoBlock extends Component {
     render() {
         return(
             <Grid container justify="center">
-                <Grid item xs={12} md={8}>
+                <Grid item xs={12} md={8} xl={6}>
                     <Paper>
                         <Grid container spacing={0} justify="center">
                             <Grid item xs={11}>

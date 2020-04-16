@@ -23,7 +23,7 @@ class AlphabetList extends Component {
         })
         .then((entries) => {
             this.setState({alphabet: entries.items})
-            console.log(entries.items)
+            //console.log(entries.items)
         })
     }
 

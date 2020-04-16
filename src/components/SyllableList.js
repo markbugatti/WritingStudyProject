@@ -6,23 +6,22 @@ import Grid from '@material-ui/core/Grid'
 class SyllableList extends Component {
     state = {
         syllables: [],
-        videoURL: ''
+        videoURL: '',
     }
 
     consonants = []
 
     constructor (props) {
         super(props);
-        this.getConsonants();
-        this.getSyllables();
         this.getVideo = this.getVideo.bind(this);
+        this.getConsonants();
     }
 
     isLetter = (letter, syllable) => {
         letter.fields.name.includes(syllable)
     }
 
-    isConsonant(letter) {
+    isConsonant (letter) {
         try {
             if(letter.fields.categories[1].fields.title === "consonant") return true;
         }
@@ -38,11 +37,14 @@ class SyllableList extends Component {
         )
         .then((albhabet) => {
             this.consonants = albhabet.items.filter(this.isConsonant);
-            //this.setState({consonants: array})
-        })    
+            this.getSyllables();
+        }, reason => {
+            console.log("cannot obtain information")
+        }
+        )
     }
 
-    getSyllables = () => {
+    getSyllables () {
         this.props.client.getEntries({
             content_type: 'syllable',
         }
@@ -53,15 +55,12 @@ class SyllableList extends Component {
         
     } 
 
-    getVideo (name) {
+    getVideo = (name) => {
         this.setState(() => (
             {
                 videoURL: process.env.PUBLIC_URL + '/assets/syllables/' + name + '_small.mp4'
             }
-            ), () => {
-                console.log(this.state.videoURL)
-                console.log(process.env.PUBLIC_URL)
-            } 
+            )
         )
     }
 
@@ -71,12 +70,14 @@ class SyllableList extends Component {
                 <Grid  container spacing={2} justify="center">
                     <Grid item lg={12}>
                         <Grid container > 
-                        {this.consonants.map(letter => (
-                            <Grid key={letter.sys.id} item xs={3} sm={2} md={1}>
-                                <Syllable letter={letter.fields.title} syllables={this.state.syllables.filter(item => item.fields.name.includes(letter.fields.title))}
-                                    onSelectItem={this.getVideo}/>
-                            </Grid>)
-                        )}
+                        {
+                            this.consonants.map(letter => (
+                                <Grid key={letter.sys.id} item xs={3} sm={2} md={1}>
+                                    <Syllable letter={letter.fields.title} syllables={this.state.syllables.filter(item => item.fields.name.includes(letter.fields.title))}
+                                        onSelectItem={this.getVideo}/>
+                                </Grid>)
+                            )
+                        }
                         </Grid>
                     </Grid>
                     <Grid item xs={12}>
