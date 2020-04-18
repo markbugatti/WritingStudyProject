@@ -69,10 +69,11 @@ class SyllableList extends Component {
             <div>
                 <Grid  container spacing={2} justify="center">
                     <Grid item lg={12}>
-                        <Grid container > 
+                        <Grid container spacing={2}>  
                         {
                             this.consonants.map(letter => (
-                                <Grid key={letter.sys.id} item xs={3} sm={2} md={1}>
+                                // <Grid key={letter.sys.id} item xs={3} sm={2} md={1}>
+                                <Grid key={letter.sys.id} item>
                                     <Syllable letter={letter.fields.title} syllables={this.state.syllables.filter(item => item.fields.name.includes(letter.fields.title))}
                                         onSelectItem={this.getVideo}/>
                                 </Grid>)

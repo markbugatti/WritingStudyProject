@@ -66,10 +66,10 @@ class VideoBlock extends Component {
         return(
             <Grid container justify="center">
                 <Grid item xs={12} md={8} xl={6}>
-                    <Paper>
+                    <Paper elevation={3}>
                         <Grid container spacing={0} justify="center">
                             <Grid item xs={11}>
-                                <video 
+                                <video  
                                     ref="vidRef"
                                     width="100%"
                                     src={this.props.videoSrc} 
