@@ -96,14 +96,14 @@ class VideoBlock extends Component {
                                 </StyledButton>        
                             </Grid>
                             <Grid item>
-                                <StyledButton
+                                {/* <StyledButton
                                     variant="contained"
                                     color="default"
                                     startIcon={<VolumeUpIcon/>}
                                     onClick={this.onSoundButtonClick}
                                 >
                                     Sound
-                                </StyledButton>
+                                </StyledButton> */}
                             </Grid>
                             <Grid item>
                                 {/*  make slider here*/}

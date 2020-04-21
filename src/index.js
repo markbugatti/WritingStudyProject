@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 
+document.title = 'Прописи';
 ReactDOM.render(<App />, document.getElementById('root'));
 document.body.style = 'background: #d4d4d4;'
 // If you want your app to work offline and load faster, you can change

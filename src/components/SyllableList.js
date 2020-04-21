@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import Syllable from './Syllable'
 import VideoBlock from './VideoBlock'
 import Grid from '@material-ui/core/Grid'
+import CircularIndeterminate  from './ProgressElement'
 
 class SyllableList extends Component {
     state = {
         syllables: [],
         videoURL: '',
+        loading: false
     }
 
     consonants = []
@@ -41,7 +43,7 @@ class SyllableList extends Component {
         }, reason => {
             console.log("cannot obtain information")
         }
-        )
+        )   
     }
 
     getSyllables () {

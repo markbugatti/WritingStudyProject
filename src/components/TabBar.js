@@ -6,8 +6,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import AlphabetList from '../components/AlphabetList';
+import AlphabetList from './AlphabetList';
 import SyllableList from './SyllableList';
+import WordList from './WordList';
 import * as contentful from 'contentful';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
@@ -65,7 +66,7 @@ export default function SimpleTabs() {
   
 
   const classes = useStyles();
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState(3);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -79,7 +80,7 @@ export default function SimpleTabs() {
           <Tab label="Інструкція" {...a11yProps(0)} disabled/>
           <Tab label="Літери" {...a11yProps(1)} />
           <Tab label="Склади" {...a11yProps(2)}/>
-          <Tab label="Слова" {...a11yProps(3)} disabled/>
+          <Tab label="Слова" {...a11yProps(3)}/>
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -92,7 +93,7 @@ export default function SimpleTabs() {
         <SyllableList client={client}/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        
+        <WordList client={client}/>
       </TabPanel>
     </div>
     </ThemeProvider>
