@@ -42,7 +42,7 @@ class WordList extends Component {
     getVideo (word) {
         this.setState(() => (
             {
-                VideoURL: process.env.PUBLIC_URL + '/assets/words/' + word.fields.transcription + '.mp4'
+                VideoURL: process.env.PUBLIC_URL + '/assets/words/' + word.fields.eng + '.mp4'
             }
         ))
     }
@@ -51,10 +51,10 @@ class WordList extends Component {
         return(
             <Grid container spacing={2} justify="center">
                 <Grid item xs={12}>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={2} justify="center">
                     {
                         this.state.words ? this.state.words.map(word => (
-                            <Grid item xs={12} key={word.sys.id}>
+                            <Grid item xs={12} sm={7} md={12} key={word.sys.id}>
                                 {/* <StyledPaper variant="outlined">     */}
                                     <Word word={word} onSelectItem={this.getVideo}/>
                                 {/* </StyledPaper> */}

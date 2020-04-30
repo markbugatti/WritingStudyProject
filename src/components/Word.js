@@ -7,31 +7,46 @@ import Typography from '@material-ui/core/Typography';
 const inputTheme = createMuiTheme({
     typography: {
       fontFamily: 'Times New Roman, Times, serif',
-      fontSize: 24,
+      fontSize: 22,
     }
   })
 
+// in future theme will adjust responsive font size
+const theme = createMuiTheme({
+    typography: {
+        fontFamily: 'Times New Roman, Times, serif',
+        fontSize: 14,
+        '@media (min-width: 600)': {
+            fontSize: '1.5rem',
+        },
+        '@media (min-width: 960)': {
+            fontSize: 14
+        },
+    },
+}
+);
 
-
-  
 const Word = (props) => {
     const handleClick = () => {
         props.onSelectItem(props.word)
     };
     return(
-        //<Typography  variant="h2" component="h2" align="center">
+        
+        //<ThemeProvider theme={inputTheme}>
+        <Typography  variant="h2" component="h2" align="center">
         <Grid container spacing={1}>
-            <Grid item xs={12} sm={4}  >
-                <Paper><div onClick={handleClick}><Typography variant="h2" component="h2" align="center">{props.word.fields.ukr}</Typography></div></Paper>
+            <Grid item xs={12} md={4}  >
+                <Paper><div onClick={handleClick}>{props.word.fields.ukr}</div></Paper>
             </Grid>            
-            <Grid item xs={12} sm={4}>
-                <Paper><div onClick={handleClick}><Typography variant="h2" component="h2" align="center">{props.word.fields.eng}</Typography></div></Paper>
+            <Grid item xs={12} md={4}>
+                <Paper><div onClick={handleClick}>{props.word.fields.eng}</div></Paper>
             </Grid>
-            <Grid item xs={12} sm={4}>
-                <Paper><div onClick={handleClick}><Typography variant="h2" component="h2" align="center">{props.word.fields.chi}</Typography></div></Paper>
+            <Grid item xs={12} md={4}>
+                <Paper><div onClick={handleClick}>{props.word.fields.chi}</div></Paper>
             </Grid>
         </Grid>
-        //</Typography>
+        </Typography>
+        //</ThemeProvider>
     )
 }
 
