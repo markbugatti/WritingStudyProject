@@ -16,10 +16,51 @@ const SPACE_ID = '7kwcorev18qn'
 const ACCESS_TOKET = 'iIqFNbMVqZWVkoVvJ_c6htofPLk3pqXyReWLLnZ7TQ0'
 
 const theme = createMuiTheme({
+  palette: {
+    background: {
+      //paper: "#d4d4d4",
+      //default: "#e57373",
+    },
+  },
   typography: {
     fontFamily: 'Times New Roman, Times, serif',
+    //fontWeightRegular: 700,
+    //fontWeightMedium: 700,
+    //subtitle 1 is only used for letters list in "syllable" tab.
+    subtitle1: {
+      fontSize: "1.6rem",
+    }
   },
+  overrides: {
+    MuiTab: {
+      root: {
+        fontSize: 14,
+      }
+    },
+    MuiInputBase: {
+      root: {
+        fontSize: "2.4rem"
+      }
+    },
+    MuiSelect: {
+      root: {
+        //fontSize: "1.6rem"
+      }
+    },
+    MuiMenuItem: {
+      root: {
+        fontSize: "2rem",
+      }
+    }
+  }
 });
+
+theme.overrides.MuiTab.root = {
+  fontSize: 14,
+  '@media (min-width:600px)': {
+      fontSize: 16,
+  }, 
+}
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,13 +92,6 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-
 export default function SimpleTabs() {
     const client = contentful.createClient({
       space: SPACE_ID,
@@ -65,8 +99,8 @@ export default function SimpleTabs() {
     })
   
 
-  const classes = useStyles();
-  const [value, setValue] = React.useState(3);
+  //const classes = useStyles();
+  const [value, setValue] = React.useState(2);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -74,7 +108,8 @@ export default function SimpleTabs() {
 
   return (
     <ThemeProvider theme={theme}>
-    <div className={classes.root} style={{backgroundColor: '#7f7f7f00'}}>
+    {/* <div className={classes.root} style={{backgroundColor: '#7f7f7f00'}}> */}
+    <div>
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Інструкція" {...a11yProps(0)} disabled/>
