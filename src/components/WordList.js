@@ -21,7 +21,8 @@ const StyledPaper = withStyles({
 class WordList extends Component {
     state = {
         words: [],
-        VideoURL: ''
+        videoURL: '',
+        wordName: '',
     }
     
     constructor(props) {
@@ -40,11 +41,10 @@ class WordList extends Component {
     }
 
     getVideo (word) {
-        this.setState(() => (
-            {
-                VideoURL: process.env.PUBLIC_URL + '/assets/words/' + word.fields.eng + '.mp4'
-            }
-        ))
+        this.setState({
+            videoURL: process.env.PUBLIC_URL + '/assets/words/' + word.fields.eng + '.mp4',
+            wordName: word.fields.ukr
+        })
     }
 
     render() {
@@ -55,9 +55,7 @@ class WordList extends Component {
                     {
                         this.state.words ? this.state.words.map(word => (
                             <Grid item xs={12} sm={7} md={12} key={word.sys.id}>
-                                {/* <StyledPaper variant="outlined">     */}
-                                    <Word word={word} onSelectItem={this.getVideo}/>
-                                {/* </StyledPaper> */}
+                                <Word word={word} onSelectItem={this.getVideo}/>
                             </Grid>
                             )
                         ) : null
@@ -65,7 +63,7 @@ class WordList extends Component {
                     </Grid> 
                 </Grid>
                 <Grid item xs={12}>
-                    <VideoBlock videoSrc={this.state.VideoURL}/>
+                    <VideoBlock videoSrc={this.state.videoURL} text={this.state.wordName}/>
                 </Grid>
             </Grid>
         )

@@ -21,6 +21,9 @@ const theme = createMuiTheme({
       //paper: "#d4d4d4",
       //default: "#e57373",
     },
+    text: {
+      secondary: "rgba(0, 0, 0, 0.87)",
+    }
   },
   typography: {
     fontFamily: 'Times New Roman, Times, serif',
@@ -28,7 +31,8 @@ const theme = createMuiTheme({
     //fontWeightMedium: 700,
     //subtitle 1 is only used for letters list in "syllable" tab.
     subtitle1: {
-      fontSize: "1.6rem",
+      fontSize: "2rem",
+
     }
   },
   overrides: {
@@ -39,7 +43,7 @@ const theme = createMuiTheme({
     },
     MuiInputBase: {
       root: {
-        fontSize: "2.4rem"
+        fontSize: "3.2rem"
       }
     },
     MuiSelect: {
