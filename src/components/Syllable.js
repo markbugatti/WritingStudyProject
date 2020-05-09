@@ -46,7 +46,6 @@ const Syllable = (props) => {
                 id="syllables=select"
                 onChange={handleChange}
                 margin="normal"
-                //value={ any from syllables == props.current syllable ? current syllable element : null}
               >    
                 {
                   props.syllables.map((syllable, i) => {

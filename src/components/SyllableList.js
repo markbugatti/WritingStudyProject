@@ -58,7 +58,6 @@ class SyllableList extends Component {
     } 
 
     getVideo (syllable) {
-        console.log(syllable);
         if(syllable !== null) {
             this.setState({
                 videoURL: process.env.PUBLIC_URL + '/assets/syllables/' + syllable.fields.transcription + '_small.mp4',
@@ -67,7 +66,7 @@ class SyllableList extends Component {
                 selectedSyllable: syllable
             })
         } 
-        else {
+        //else {
             // оставить предыдущий слог
             // this.setState(state => {
             //     return {
@@ -80,7 +79,7 @@ class SyllableList extends Component {
             //     videoURL: '',
             //     syllName: ''
             // })    
-        }
+        //}
     }
 
     defineValue(syllables) {
@@ -122,11 +121,10 @@ class SyllableList extends Component {
                                 obj['syllables'] = this.state.syllables.filter(item => item.fields.name.includes(letter.fields.title))
                                 obj['getVideo']= this.getVideo
                                 obj['selectedSyllable'] = this.state.selectedSyllable;
-                                obj['value'] = this.defineValue(obj['syllables']);
                                 return (
                                 <Grid key={obj['id']} item>
                                     <Syllable letter={obj['letter']} syllables={obj['syllables']}
-                                        onSelectItem={obj['getVideo']} currentSyllableName={obj['selectedSyllable']} selectValue={obj['value']}/>
+                                        onSelectItem={obj['getVideo']} currentSyllableName={obj['selectedSyllable']}/>
                                 </Grid>)
                             })
                         }
