@@ -1,61 +1,57 @@
 import React from 'react'
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-import InputBase from '@material-ui/core/InputBase'
-import { Typography, createMuiTheme, ThemeProvider } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper'
 
-const inputTheme = createMuiTheme({
-  typography: {
-    fontFamily: 'Times New Roman, Times, serif',
-    fontSize: 24,
-  }
-})
 
-
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-      margin: theme.spacing(0),
-      minWidth: 130,
-      //minHeight: 60,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-    margin: {
-      margin: theme.spacing(1),
-    }
-  }));
+const useStyles = makeStyles({
+  formControl: {
+    minWidth: 110,
+    maxWidth: 160,
+  },
+});
 
 const Syllable = (props) => {
     const classes = useStyles();
-    const handleChange = event => {
-      props.onSelectItem(event.target.value)
-      // console.log(event.target.value)
+    const handleChange = (e) => {
+        // выставить остальные пункты меню в состояние "Не выбрано"
+        props.onSelectItem(e.target.value);
     };
+
+    function calcValue() {
+      var found = props.syllables.find(props.currentSyllableName.fields.name)
+      if(found !== undefined) {
+        return found;
+      }
+      else {
+        return "";
+      }
+    }
+
     return(
+        <div>
         <Paper>
-          <ThemeProvider theme={inputTheme}>
+          {/* <ThemeProvider theme={inputTheme}> */}
             <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel id="syllables-select-label">
-                {props.letter}
+                <Typography variant="subtitle1">{props.letter}</Typography>
+                {/* {props.letter} */}
               </InputLabel>
               <Select
                 labelId="syllables-select-label"
                 id="syllables=select"
                 onChange={handleChange}
                 margin="normal"
-              >
-                <MenuItem value="">
-                  Не вибрано
-                </MenuItem>
+                //value={ any from syllables == props.current syllable ? current syllable element : null}
+              >    
                 {
                   props.syllables.map((syllable, i) => {
                     return (
-                      <MenuItem key={i} value={syllable.fields.transcription}>
+                      <MenuItem key={i} value={syllable}>
                         {syllable.fields.name}
                       </MenuItem>
                       );
@@ -64,8 +60,9 @@ const Syllable = (props) => {
                 }
               </Select>
             </FormControl>
-          </ThemeProvider>
+          {/* </ThemeProvider> */}
         </Paper>
+        </div>
     )
 }
 

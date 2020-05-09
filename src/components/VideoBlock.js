@@ -8,6 +8,7 @@ import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import { withStyles } from '@material-ui/core/styles';
 
 var synth = window.speechSynthesis;
+var gtWindow;
 
 const StyledButton = withStyles({
     root: {
@@ -19,7 +20,6 @@ class VideoBlock extends Component {
     state = {
         play: false,
         soundUrl: '',
-        
     }
 
     constructor(props) {
@@ -59,7 +59,7 @@ class VideoBlock extends Component {
         //var utterThis = new SpeechSynthesisUtterance('hello');
         //console.log(synth.getVoices());
         //synth.speak(utterThis);
-        //var gtWindow = window.open("https://translate.google.com/?source=gtx#view=home&op=translate&sl=uk&tl=en&text=привіт як справи", "google translate", "");
+        gtWindow = window.open("https://translate.google.com/?source=gtx#view=home&op=translate&sl=uk&tl=en&text=" + this.props.text, "google translate", "");
     }
 
     render() {
@@ -96,14 +96,14 @@ class VideoBlock extends Component {
                                 </StyledButton>        
                             </Grid>
                             <Grid item>
-                                {/* <StyledButton
+                                <StyledButton
                                     variant="contained"
                                     color="default"
                                     startIcon={<VolumeUpIcon/>}
                                     onClick={this.onSoundButtonClick}
                                 >
                                     Sound
-                                </StyledButton> */}
+                                </StyledButton>
                             </Grid>
                             <Grid item>
                                 {/*  make slider here*/}

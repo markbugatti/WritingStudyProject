@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React,  {Component} from 'react';
 import Grid from '@material-ui/core/Grid'
 import Letter from './Letter'
 import VideoBlock from './VideoBlock'
@@ -7,7 +7,8 @@ import Typography from '@material-ui/core/Typography';
 class AlphabetList extends Component {
     state = {
         alphabet: [],
-        VideoURL: ''
+        videoURL: '',
+        letterName: '',
     }
     
     constructor(props) {
@@ -22,17 +23,17 @@ class AlphabetList extends Component {
             order: 'fields.id'
         })
         .then((entries) => {
-            this.setState({alphabet: entries.items})
+            this.setState({alphabet: entries.items});
             //console.log(entries.items)
         })
     }
 
     getVideo (letter) {
-        this.setState(() => (
-            {
-                VideoURL: process.env.PUBLIC_URL + '/assets/letters/' + letter.fields.transcription + "_" + letter.fields.categories[0].fields.title + '.mp4'
-            }
-        ))
+        this.setState({
+            videoURL: process.env.PUBLIC_URL + '/assets/letters/' + 
+            letter.fields.transcription + "_" + letter.fields.categories[0].fields.title + '.mp4',
+            letterName: letter.fields.title,
+        })
     }
 
     render() {
@@ -51,7 +52,7 @@ class AlphabetList extends Component {
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <VideoBlock videoSrc={this.state.VideoURL}/>
+                        <VideoBlock videoSrc={this.state.videoURL} text={this.state.letterName}/>
                     </Grid>
                 </Grid>
             </div>
