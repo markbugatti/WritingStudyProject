@@ -1,6 +1,8 @@
 import React from 'react';
+
+import { useTranslation } from "react-i18next";
+
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -11,6 +13,8 @@ import SyllableList from './SyllableList';
 import WordList from './WordList';
 import * as contentful from 'contentful';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+
 
 const SPACE_ID = '7kwcorev18qn'
 const ACCESS_TOKET = 'iIqFNbMVqZWVkoVvJ_c6htofPLk3pqXyReWLLnZ7TQ0'
@@ -96,12 +100,13 @@ function a11yProps(index) {
   };
 }
 
-export default function SimpleTabs() {
+function SimpleTabs() {
     const client = contentful.createClient({
       space: SPACE_ID,
       accessToken: ACCESS_TOKET
     })
   
+  const { t, i18n } = useTranslation();
 
   //const classes = useStyles();
   const [value, setValue] = React.useState(2);
@@ -109,17 +114,18 @@ export default function SimpleTabs() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  
+  
   return (
     <ThemeProvider theme={theme}>
     {/* <div className={classes.root} style={{backgroundColor: '#7f7f7f00'}}> */}
     <div>
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Інструкція" {...a11yProps(0)} disabled/>
-          <Tab label="Літери" {...a11yProps(1)} />
-          <Tab label="Склади" {...a11yProps(2)}/>
-          <Tab label="Слова" {...a11yProps(3)}/>
+          <Tab label={t('tabBar.Instraction')} {...a11yProps(0)} disabled/>
+          <Tab label={t('tabBar.Letter')} {...a11yProps(1)} />
+          <Tab label={t('tabBar.Syllable')} {...a11yProps(2)}/>
+          <Tab label={t('tabBar.Words')} {...a11yProps(3)}/>
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -138,3 +144,5 @@ export default function SimpleTabs() {
     </ThemeProvider>
   );
 }
+
+export default SimpleTabs;

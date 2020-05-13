@@ -5,7 +5,10 @@ import Button from '@material-ui/core/Button';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled';
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
+
 import { withStyles } from '@material-ui/core/styles';
+import { withTranslation } from 'react-i18next';
+
 
 var synth = window.speechSynthesis;
 var gtWindow;
@@ -17,6 +20,7 @@ const StyledButton = withStyles({
 })(Button)
 
 class VideoBlock extends Component {
+    
     state = {
         play: false,
         soundUrl: '',
@@ -92,7 +96,7 @@ class VideoBlock extends Component {
                                     }
                                     onClick={this.onPlayPauseButtonClick}
                                     >
-                                    Play/Pause
+                                    {this.props.t('videoBlock.Play/pause')}
                                 </StyledButton>        
                             </Grid>
                             <Grid item>
@@ -102,7 +106,7 @@ class VideoBlock extends Component {
                                     startIcon={<VolumeUpIcon/>}
                                     onClick={this.onSoundButtonClick}
                                 >
-                                    Sound
+                                    {this.props.t('videoBlock.Pronounce')}
                                 </StyledButton>
                             </Grid>
                             <Grid item>
@@ -116,4 +120,4 @@ class VideoBlock extends Component {
     }
 }
 
-export default VideoBlock;
+export default withTranslation()(VideoBlock);

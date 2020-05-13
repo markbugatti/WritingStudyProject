@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+
+
 import Syllable from './Syllable'
 import VideoBlock from './VideoBlock'
 import Grid from '@material-ui/core/Grid'
@@ -107,6 +109,7 @@ class SyllableList extends Component {
     }
 
     render() {
+
         var obj = {}
         return (                
             <div>
