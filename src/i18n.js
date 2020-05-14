@@ -58,7 +58,7 @@ i18n
         },
         
         fallbackLng: "en",
-        //lng: "en",
+        //lng: "ru",
 
         interpolation: {
             escapeValue: false, // not needed for react!!

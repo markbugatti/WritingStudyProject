@@ -1,19 +1,25 @@
 import React from 'react';
 
+import * as contentful from 'contentful';
+
 import { useTranslation } from "react-i18next";
+
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+
+
+import Typography from '@material-ui/core/Typography';
+
+import LanguageSelector from './LanguageSelector';
 import AlphabetList from './AlphabetList';
 import SyllableList from './SyllableList';
 import WordList from './WordList';
-import * as contentful from 'contentful';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-
 
 
 const SPACE_ID = '7kwcorev18qn'
@@ -113,6 +119,7 @@ function SimpleTabs() {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    console.log(i18n);
   };
   
   
@@ -121,12 +128,12 @@ function SimpleTabs() {
     {/* <div className={classes.root} style={{backgroundColor: '#7f7f7f00'}}> */}
     <div>
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label={t('tabBar.Instraction')} {...a11yProps(0)} disabled/>
-          <Tab label={t('tabBar.Letter')} {...a11yProps(1)} />
-          <Tab label={t('tabBar.Syllable')} {...a11yProps(2)}/>
-          <Tab label={t('tabBar.Words')} {...a11yProps(3)}/>
-        </Tabs>
+          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+            <Tab label={t('tabBar.Instraction')} {...a11yProps(0)} disabled/>
+            <Tab label={t('tabBar.Letter')} {...a11yProps(1)} />
+            <Tab label={t('tabBar.Syllable')} {...a11yProps(2)}/>
+            <Tab label={t('tabBar.Words')} {...a11yProps(3)}/>
+          </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         {/* place for instruction */}
@@ -140,6 +147,7 @@ function SimpleTabs() {
       <TabPanel value={value} index={3}>
         <WordList client={client}/>
       </TabPanel>
+
     </div>
     </ThemeProvider>
   );
