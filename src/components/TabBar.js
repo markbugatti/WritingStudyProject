@@ -16,7 +16,9 @@ import Box from '@material-ui/core/Box';
 
 import Typography from '@material-ui/core/Typography';
 
-import LanguageSelector from './LanguageSelector';
+// import LanguageSelector from './LanguageSelector';
+import LanguageSelector from './LanguageSelector1';
+
 import AlphabetList from './AlphabetList';
 import SyllableList from './SyllableList';
 import WordList from './WordList';
@@ -128,12 +130,13 @@ function SimpleTabs() {
     {/* <div className={classes.root} style={{backgroundColor: '#7f7f7f00'}}> */}
     <div>
       <AppBar position="static">
-          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-            <Tab label={t('tabBar.Instraction')} {...a11yProps(0)} disabled/>
-            <Tab label={t('tabBar.Letter')} {...a11yProps(1)} />
-            <Tab label={t('tabBar.Syllable')} {...a11yProps(2)}/>
-            <Tab label={t('tabBar.Words')} {...a11yProps(3)}/>
-          </Tabs>
+        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          <Tab label={t('tabBar.Instraction')} {...a11yProps(0)} disabled/>
+          <Tab label={t('tabBar.Letter')} {...a11yProps(1)} />
+          <Tab label={t('tabBar.Syllable')} {...a11yProps(2)}/>
+          <Tab label={t('tabBar.Words')} {...a11yProps(3)}/>
+          <LanguageSelector/>
+        </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         {/* place for instruction */}
@@ -147,7 +150,7 @@ function SimpleTabs() {
       <TabPanel value={value} index={3}>
         <WordList client={client}/>
       </TabPanel>
-
+      
     </div>
     </ThemeProvider>
   );
