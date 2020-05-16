@@ -8,7 +8,6 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
@@ -128,30 +127,30 @@ function SimpleTabs() {
   return (
     <ThemeProvider theme={theme}>
     {/* <div className={classes.root} style={{backgroundColor: '#7f7f7f00'}}> */}
-    <div>
-      <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label={t('tabBar.Instraction')} {...a11yProps(0)} disabled/>
-          <Tab label={t('tabBar.Letter')} {...a11yProps(1)} />
-          <Tab label={t('tabBar.Syllable')} {...a11yProps(2)}/>
-          <Tab label={t('tabBar.Words')} {...a11yProps(3)}/>
-          <LanguageSelector/>
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        {/* place for instruction */}
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <AlphabetList client={client}/>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <SyllableList client={client}/>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <WordList client={client}/>
-      </TabPanel>
-      
-    </div>
+      <div>
+        <AppBar position="static">
+          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+            <Tab label={t('tabBar.Instraction')} {...a11yProps(0)} disabled/>
+            <Tab label={t('tabBar.Letter')} {...a11yProps(1)} />
+            <Tab label={t('tabBar.Syllable')} {...a11yProps(2)}/>
+            <Tab label={t('tabBar.Words')} {...a11yProps(3)}/>
+            <LanguageSelector/>
+          </Tabs>
+        </AppBar>
+        <TabPanel value={value} index={0}>
+          {/* place for instruction */}
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <AlphabetList client={client}/>
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <SyllableList client={client}/>
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <WordList client={client}/>
+        </TabPanel>
+        
+      </div>
     </ThemeProvider>
   );
 }

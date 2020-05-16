@@ -20,11 +20,12 @@ i18n
                         "Letter": "Літери",
                         "Syllable": "Склади",
                         "Words": "Слова",
+                        "Language": "Мова",
                     },
                     "videoBlock": {
                         "Play/pause": "старт/стоп",
                         "Pronounce": "Вимова"
-                    } 
+                    }, 
                 }
             },
             ru: {
@@ -34,11 +35,12 @@ i18n
                         "Letter": "Буквы",
                         "Syllable": "Слоги",
                         "Words": "Слова",
+                        "Language": "Язык",
                     },
                     "videoBlock": {
                         "Play/pause": "старт/стоп",
                         "Pronounce": "Произношение"
-                    } 
+                    },
                 }
             },
             en: {
@@ -48,11 +50,12 @@ i18n
                         "Letter": "Letter",
                         "Syllable": "Syllables",
                         "Words": "Words",
+                        "Language": "Language",
                     },
                     "videoBlock": {
                         "Play/pause": "Play/pause",
                         "Pronounce": "Pronounce"
-                    }
+                    },
                 }
             }
         },

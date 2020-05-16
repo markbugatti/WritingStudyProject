@@ -1,7 +1,10 @@
 // Разработка на основе https://material-ui.com/components/app-bar/#app-bar
 
 import React from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
+import { useTranslation } from "react-i18next";
+
 
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -32,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LanguageSelector() {
     const classes = useStyles();     
+    const { t, i18n } = useTranslation();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -47,14 +51,27 @@ export default function LanguageSelector() {
         setMobileMoreAnchorEl(null);
       };
     
-    const handleMenuClose = () => {
+    const handleMenuClose = (event) => {
         setAnchorEl(null);
         handleMobileMenuClose();
+        selectLanguage(event.currentTarget.innerText);
     };
 
     const handleMobileMenuOpen = (event) => {
       setMobileMoreAnchorEl(event.currentTarget);
     };
+
+    const selectLanguage = (value) => {
+      let lang = "";
+      if(value === "English") {
+        lang = "en";
+      } else if (value === "Русский") {
+        lang = "ru";
+      } else if (value === "Українська") {
+        lang = "ua";
+      }
+      i18n.changeLanguage(lang);
+    }
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -69,14 +86,53 @@ export default function LanguageSelector() {
         >
             {/* Вставить сюда языки */}
           {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
-          <MenuItem onClick={handleMenuClose}>
+          <MenuItem onClick={handleMenuClose} >
+          <IconButton
+            aria-label="en"
+            //aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
             <CountryFlag
               countryCode="GB"
               svg
             />
+          </IconButton>  
             English
           </MenuItem>
-          <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+          <MenuItem onClick={handleMenuClose}>
+          <IconButton
+            aria-label="ru"
+            //aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <CountryFlag
+              countryCode="RU"
+              svg
+            />
+          </IconButton>  
+            Русский
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose}>
+          <IconButton
+            aria-label="ua"
+            //aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <CountryFlag
+              countryCode="UA"
+              svg
+            />
+          </IconButton>  
+            Українська
+          </MenuItem>
+
+
+
+
+          {/*<MenuItem onClick={handleMenuClose}>My account</MenuItem>*/}
         </Menu>
     );
     
@@ -100,7 +156,7 @@ export default function LanguageSelector() {
           >
             <LanguageIcon />
           </IconButton>
-          <p>Profile</p>
+          {t("tabBar.Language")}
         </MenuItem>
       </Menu>
     );
