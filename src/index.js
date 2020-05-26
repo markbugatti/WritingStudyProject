@@ -5,8 +5,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import "./i18n"
 
-document.title = 'Прописи';
-
 
 ReactDOM.render(
     <App />,

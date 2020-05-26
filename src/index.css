@@ -11,3 +11,48 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+}
+#main {
+  position: absolute;
+  height: auto;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* margin: 10px; */
+  /* background-color: green; */
+}
+
+/* html, body, #root, #tab-bar, .makeStyles-root-97, .MuiBox-root-736 {
+  height: 100%;
+} */
+
+/* .TabBar-container {
+ height: 100%;
+} */
+
+/* html {
+  height: 100%;
+} */
+
+/* .makeStyles-root-97 {
+  height: fit-content;
+} */
+
+
+/* @media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) {
+  .makeStyles-root-97 {
+    height: fit-content;
+  }
+} */

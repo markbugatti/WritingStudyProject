@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import Syllable from './Syllable'
 import VideoBlock from './VideoBlock'
 import Grid from '@material-ui/core/Grid'
+import { Container } from '@material-ui/core';
 
 class SyllableList extends Component {
     state = {
@@ -111,33 +112,31 @@ class SyllableList extends Component {
     render() {
 
         var obj = {}
-        return (                
-            <div>
-                <Grid  container spacing={2} justify="center">
-                    <Grid item>
-                        <Grid container spacing={2}>  
-                        {
-                            this.consonants.map(letter => 
-                            { 
-                                obj['id'] = letter.sys.id
-                                obj['letter'] = letter.fields.title
-                                obj['syllables'] = this.state.syllables.filter(item => item.fields.name.includes(letter.fields.title))
-                                obj['getVideo']= this.getVideo
-                                obj['selectedSyllable'] = this.state.selectedSyllable;
-                                return (
-                                <Grid key={obj['id']} item>
-                                    <Syllable letter={obj['letter']} syllables={obj['syllables']}
-                                        onSelectItem={obj['getVideo']} currentSyllableName={obj['selectedSyllable']}/>
-                                </Grid>)
-                            })
-                        }
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <VideoBlock videoSrc={this.state.videoURL} text={this.state.syllName}/>
+        return (
+            <Grid  container spacing={2} justify="center">
+                <Grid item xs={12}>
+                    <Grid container spacing={1}>  
+                    {
+                        this.consonants.map(letter => 
+                        { 
+                            obj['id'] = letter.sys.id
+                            obj['letter'] = letter.fields.title
+                            obj['syllables'] = this.state.syllables.filter(item => item.fields.name.includes(letter.fields.title))
+                            obj['getVideo']= this.getVideo
+                            obj['selectedSyllable'] = this.state.selectedSyllable;
+                            return (
+                            <Grid key={obj['id']} item xs={4} sm={2} lg={1}>
+                                <Syllable letter={obj['letter']} syllables={obj['syllables']}
+                                    onSelectItem={obj['getVideo']} currentSyllableName={obj['selectedSyllable']}/>
+                            </Grid>)
+                        })
+                    }
                     </Grid>
                 </Grid>
-            </div>    
+                <Grid item xs={12}>
+                    <VideoBlock videoSrc={this.state.videoURL} text={this.state.syllName}/>
+                </Grid>
+            </Grid>  
         )
     }
 
