@@ -28,6 +28,9 @@ const theme = createMuiTheme({
     //subtitle 1 is only used for letters list in "syllable" tab.
     subtitle1: {
       fontSize: "2rem",
+    },
+    body1: {
+      fontSize: "1.25rem",  
     }
   },
   overrides: {

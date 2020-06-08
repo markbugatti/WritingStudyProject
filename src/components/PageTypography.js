@@ -7,7 +7,11 @@ import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: theme.palette.background.default,
+        // backgroundColor: theme.palette.background.default,
+        padding: theme.spacing(2),
+        [theme.breakpoints.down('sm')]: {
+          padding: theme.spacing(1),
+        }
     },
 }));
 
@@ -26,7 +30,7 @@ export default function TabPanel(props) {
         aria-labelledby={`simple-tab-${index}`}
         {...other}
       >
-        {value === index && <Box p={3} className="TabBar-container" height="100%">{children}</Box>}
+        {value === index && <Box className={[classes.root, "TabBar-container"].join(' ')} height="100%">{children}</Box>}
       </Typography>
     );
   }

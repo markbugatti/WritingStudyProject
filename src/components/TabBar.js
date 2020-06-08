@@ -53,7 +53,7 @@ function SimpleTabs() {
             <Tab label={t('tabBar.Letter')} {...a11yProps(1)} />
             <Tab label={t('tabBar.Syllable')} {...a11yProps(2)}/>
             <Tab label={t('tabBar.Words')} {...a11yProps(3)}/>
-            {/* <LanguageSelector/> */}
+            <LanguageSelector/>
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>

@@ -9,9 +9,12 @@ import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        margin: theme.spacing(1),
+        margin: theme.spacing(0),
         padding: theme.spacing(2),
-        minHeight: '100px'
+        minHeight: '100px',
+        // [theme.breakpoints.up('xs')]: {
+        //     margin: '0px',
+        // }
     },
 }));
 
@@ -30,7 +33,11 @@ function Manual() {
                 <Typography variant="body1" >
                     {t('Manual.LetterBody.Paragraph1')} 
                     <br/>
-                    {t('Manual.LetterBody.Paragraph2')} 
+                    {t('Manual.LetterBody.Usage')}
+                    <br/>
+                    <ul>
+                        <li>{t('Manual.LetterBody.Point1')}</li>
+                    </ul>
                 </Typography>
                 {/* Second Paragraph */}
                 <Typography variant="subtitle1">
@@ -39,7 +46,12 @@ function Manual() {
                 <Typography variant="body1" >
                     {t('Manual.SyllableBody.Paragraph1')} 
                     <br/>
-                    {t('Manual.SyllableBody.Paragraph2')} 
+                    {t('Manual.SyllableBody.Usage')}
+                    <br/>
+                    <ul>
+                        <li>{t('Manual.SyllableBody.Point1')}</li>
+                        <li>{t('Manual.SyllableBody.Point2')}</li>
+                    </ul> 
                 </Typography>
                 {/* Third Paragraph */}
                 <Typography variant="subtitle1">
@@ -48,7 +60,11 @@ function Manual() {
                 <Typography variant="body1" >
                     {t('Manual.WordBody.Paragraph1')} 
                     <br/>
-                    {t('Manual.WordBody.Paragraph2')} 
+                    {t('Manual.WordBody.Usage')} 
+                    <br/>
+                    <ul>
+                        <li>{t('Manual.WordBody.Point1')}</li>
+                    </ul>
                 </Typography>      
             </Paper>
         </Grid>
