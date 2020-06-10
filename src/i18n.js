@@ -77,8 +77,8 @@ i18n
                         },
                         "SyllableTitle": "Закладка СЛОГИ",
                         "SyllableBody": {
-                            "Paragraph1": "This page demonstrates the correct connection of letters in syllables. This is necessary for the formation of skills of continuous writing of words in the Ukrainian language.",
-                            "Usage": "So, to use it you should:",
+                            "Paragraph1": "Тренажер демонстрирует правильное объединение букв в слогах. Это необходимо для формирования навыков безотрывного написания слов в украинском языке.",
+                            "Usage": "Для использования:",
                             "Point1":  "Тренажер демонстрирует правильное объединение букв в слогах. Это необходимо для формирования навыков безотрывного написания слов в украинском языке.",
                             "Point2": "Нажать мышью на слог. Снизу, на экране, появиться анимационное отображение процесса написания слога."                    
                         },

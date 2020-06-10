@@ -8,8 +8,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-// import LanguageSelector from './LanguageSelector';
-import LanguageSelector from './LanguageSelector1';
+import LanguageSelector from './LanguageSelector';
 
 import TabPanel from './PageTypography';
 import Manual from './Manual';
@@ -29,12 +28,12 @@ function a11yProps(index) {
 }
 
 function SimpleTabs() {
-    const client = contentful.createClient({
-      space: SPACE_ID,
-      accessToken: ACCESS_TOKET
-    })
-  
-  const { t, i18n } = useTranslation();
+  const client = contentful.createClient({
+    space: SPACE_ID,
+    accessToken: ACCESS_TOKET
+  })
+
+  const { t } = useTranslation();
 
   //const classes = useStyles();
   const [value, setValue] = React.useState(1);
@@ -48,7 +47,10 @@ function SimpleTabs() {
   return (
       <div id="tab-bar">
         <AppBar position="static">
-          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          <Tabs value={value} 
+                onChange={handleChange}
+                aria-label="simple tabs example"
+                variant="scrollable">
             <Tab label={t('tabBar.Instraction')} {...a11yProps(0)}/>
             <Tab label={t('tabBar.Letter')} {...a11yProps(1)} />
             <Tab label={t('tabBar.Syllable')} {...a11yProps(2)}/>

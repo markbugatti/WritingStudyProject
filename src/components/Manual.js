@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Manual() {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const classes = useStyles();
 
     return (

@@ -1,66 +1,197 @@
+// Разработка на основе https://material-ui.com/components/app-bar/#app-bar
+
 import React from 'react';
 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-
+import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from "react-i18next";
 
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
 
-import InputBase from '@material-ui/core/InputBase';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import IconButton from '@material-ui/core/IconButton';
+import LanguageIcon from '@material-ui/icons/Language';
+import { Toolbar } from '@material-ui/core';
+import MoreIcon from '@material-ui/icons/MoreVert';
 
-const BootstrapInput = withStyles((theme) => ({
-    root: {
-      'label + &': {
-        marginTop: theme.spacing(3),
-      },
-    },
-    input: {
-      borderRadius: 4,
-      position: 'relative',
-      backgroundColor: theme.palette.background.paper,
-      border: '1px solid #ced4da',
-      fontSize: 16,
-      padding: '10px 26px 10px 12px',
-      transition: theme.transitions.create(['border-color', 'box-shadow']),
-      '&:focus': {
-        borderRadius: 4,
-        borderColor: '#80bdff',
-        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-      },
-    },
-  }))(InputBase);
+import CountryFlag from 'react-country-flag';
 
 const useStyles = makeStyles((theme) => ({
-    margin: {
-        margin: theme.spacing(1),
+  grow: {
+    flexGrow: 1,  
+  }, 
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
     },
-}))
+  },
+  sectionMobile: {
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+}));
 
-export default function LangulangSelect() {
-    const classes = useStyles();
+export default function LanguageSelector() {
+    const classes = useStyles();     
     const { t, i18n } = useTranslation();
-    const [lang, setLang] = React.useState(i18n.language);
-    const handleChange = (event) => {
-        setLang(event.target.value);
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+    const isMenuOpen = Boolean(anchorEl);
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    const handleProfileMenuOpen = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+
+    const handleMobileMenuClose = () => {
+        setMobileMoreAnchorEl(null);
+      };
+    
+    const handleMenuClose = (event) => {
+        setAnchorEl(null);
+        handleMobileMenuClose();
+        selectLanguage(event.currentTarget.innerText);
+    };
+
+    const handleMobileMenuOpen = (event) => {
+      setMobileMoreAnchorEl(event.currentTarget);
+    };
+
+    const selectLanguage = (value) => {
+      let lang = "";
+      if(value === "English") {
+        lang = "en";
+      } else if (value === "Русский") {
+        lang = "ru";
+      } else if (value === "Українська") {
+        lang = "ua";
+      }
+      i18n.changeLanguage(lang);
     }
 
+    const menuId = 'primary-search-account-menu';
+    const renderMenu = (
+        <Menu
+          anchorEl={anchorEl}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          id={menuId}
+          keepMounted
+          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={isMenuOpen}
+          onClose={handleMenuClose}
+        >
+            {/* Вставить сюда языки */}
+          {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
+          <MenuItem onClick={handleMenuClose} >
+          <IconButton
+            aria-label="en"
+            //aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <CountryFlag
+              countryCode="GB"
+              svg
+            />
+          </IconButton>  
+            English
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose}>
+          <IconButton
+            aria-label="ru"
+            //aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <CountryFlag
+              countryCode="RU"
+              svg
+            />
+          </IconButton>  
+            Русский
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose}>
+          <IconButton
+            aria-label="ua"
+            //aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <CountryFlag
+              countryCode="UA"
+              svg
+            />
+          </IconButton>  
+            Українська
+          </MenuItem>
+
+
+
+
+          {/*<MenuItem onClick={handleMenuClose}>My account</MenuItem>*/}
+        </Menu>
+    );
+    
+    const mobileMenuId = 'primary-search-account-menu-mobile';
+    const renderMobileMenu = (
+      <Menu
+        anchorEl={mobileMoreAnchorEl}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        id={mobileMenuId}
+        keepMounted
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
+      >
+        <MenuItem onClick={handleProfileMenuOpen}>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <LanguageIcon />
+          </IconButton>
+          {t("tabBar.Language")}
+        </MenuItem>
+      </Menu>
+    );
+
+
     return(
-        //<FormControl className={classes.margin}>
-        <FormControl className={classes.margin}>
-            <InputLabel htmlFor="demo-customized-select-native">lang</InputLabel>
-            <NativeSelect
-                id="demo-customized-select-native"
-                value={lang}
-                onChange={handleChange}
-                input={<BootstrapInput />}
+      <div className={classes.grow}>
+        <Toolbar>
+        <div className={classes.grow} />
+        <div className={classes.sectionDesktop}>
+            <IconButton
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
             >
-                {/* <option aria-label="None" value="" /> */}
-                <option value={"en"}>Eng</option>
-                <option value={"ru"}>Rus</option>
-                <option value={"ua"}>Ukr</option>
-            </NativeSelect>
-        </FormControl>
+              <LanguageIcon />
+            </IconButton>
+          </div>
+          <div className={classes.sectionMobile}>
+            <IconButton
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MoreIcon />
+            </IconButton>
+          </div>
+        </Toolbar>
+        {renderMobileMenu}
+        {renderMenu}
+      </div>
     )
 }

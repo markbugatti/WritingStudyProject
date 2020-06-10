@@ -13,11 +13,16 @@ import { withTranslation } from 'react-i18next';
 var synth = window.speechSynthesis;
 var gtWindow;
 
-const StyledButton = withStyles({
+const StyledButton = withStyles((theme) => ({
     root: {
-        margin: '10px'
+        marginLeft: '10px',
+        marginBottom: '10px',
+        [theme.breakpoints.down("xs")]: {
+            marginLeft: '5px',
+            marginBottom: '5px',
+        },
     }
-})(Button)
+}))(Button)
 
 class VideoBlock extends Component {
     
@@ -85,7 +90,6 @@ class VideoBlock extends Component {
                         </Grid>
                         <Grid container>
                             <Grid item>
-
                                 <StyledButton
                                     variant="contained"
                                     color="primary"
@@ -109,9 +113,9 @@ class VideoBlock extends Component {
                                     {this.props.t('videoBlock.Pronounce')}
                                 </StyledButton>
                             </Grid>
-                            <Grid item>
-                                {/*  make slider here*/}
-                            </Grid>
+                            {/* <Grid item>
+                                {/*  make slider here
+                            </Grid> */}
                         </Grid>
                     </Paper>
                 </Grid>
