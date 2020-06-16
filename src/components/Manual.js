@@ -65,7 +65,18 @@ function Manual() {
                     <ul>
                         <li>{t('Manual.WordBody.Point1')}</li>
                     </ul>
-                </Typography>      
+                </Typography>    
+                {/* Notes  */}
+                <Typography variant="subtitle1">
+                    {t('Manual.NotesTitle')}
+                </Typography> 
+                <Typography variant="body1" >
+                    <ul>
+                        <li>{t('Manual.NotesBody.Point1')}</li>
+                        <li>{t('Manual.NotesBody.Point2')}</li>
+                        <li>{t('Manual.NotesBody.Point3')}</li>
+                    </ul>
+                </Typography>    
             </Paper>
         </Grid>
         </Grid>
